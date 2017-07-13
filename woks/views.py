@@ -8,7 +8,11 @@ from .models import Chapter
 
 
 def index(request):
-    chapter = Chapter.objects.filter().first()
-    html = markdown2.markdown(chapter.body)
+    chapters = Chapter.objects.filter().order_by('-rank')
+    html = ''
+    for chapter in chapters:
+        html +='<hr />'
+        html += markdown2.markdown(chapter.body)
+        html +='<hr />'
 
     return HttpResponse(html)
