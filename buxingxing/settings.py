@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'woks',
     'yax',
     'ganx',
+    'erlangshen',
 ]
 
 MIDDLEWARE = [

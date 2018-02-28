@@ -23,4 +23,5 @@ from woks import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index),
+    url(r'^erlangshen/', include('erlangshen.urls')),
 ]
