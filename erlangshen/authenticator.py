@@ -1,5 +1,5 @@
 from authenticator import Authenticator
-from app.utils import Storage
+from .utils import Storage
 
 platform = 'WHERE-APP'
 storage = Storage()

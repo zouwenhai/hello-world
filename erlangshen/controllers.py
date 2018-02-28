@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 
 from api import errors
-from app.authenticator import authenticator
+from .authenticator import authenticator
 
 
 def login(username, password):

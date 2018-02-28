@@ -8,3 +8,12 @@ class Account(models.Model):
     password = models.CharField(max_length=128)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def detail(self):
+        data = {
+            'platform': self.platform,
+            'username': self.username,
+            'password': self.password,
+        }
+        return data
