@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from api import Api
 from api import errors
 
-from ganx.models import Account
+from .models import Account
 from .authenticator import authenticator
 from . import controllers as app_ctl
 
@@ -49,7 +49,7 @@ class Logout(AppApi):
         app_ctl.logout(self.user_id)
 
 
-class AccountList(AppApi):
+class AccountView(AppApi):
     need_authorize = False
 
     def get(self, request):
@@ -65,3 +65,11 @@ class AccountList(AppApi):
         }
 
         return data
+
+    def post(self, request):
+        data = json.loads(request.body)
+        platform = data.get('platform') or ''
+        username = data.get('username') or ''
+        password = data.get('password') or ''
+
+        app_ctl.create_account(platform, username, password)

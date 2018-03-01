@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^signup/$', views.Signup()),
     url(r'^login/$', views.Login()),
     url(r'^logout/$', views.Logout()),
-    url(r'^account/list/$', views.AccountList()),
+    url(r'^account/$', views.AccountView()),
 ]
