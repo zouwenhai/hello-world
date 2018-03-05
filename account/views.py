@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from api import Api
 from . import controllers as account_ctl
+from .authenticator import authenticator
 
 
 class AppApi(Api):
@@ -15,10 +16,13 @@ class LoginView(AppApi):
 
     def post(self, request):
         data = json.loads(request.body)
+        platform_sign = data.get('platform_sign')
         username = data.get('username')
         password = data.get('password')
 
-        signture = account_ctl.login()
+        user = account_ctl.login(platform_sign, username, password)
+        key = '%s:%s' % (platform_sign, user.pk)
+        signture = authenticator.gen_sign(key)
 
         data = {
             'signture': signture,

@@ -5,10 +5,18 @@ from .models import Platform
 from .models import AccountToPlatformMapping
 
 
-def login(platform, username, password):
+def login(platform_sign, username, password):
     user = authenticate(username=username, password=password)
     if not user:
         raise errors.ApiError('用户名或者密码不正确')
+    platform = Platform.objects.filter(sign=platform_sign).first()
+    if not platform:
+        raise errors.ApiError('平台标识异常')
+    if not  AccountToPlatformMapping.objects.filter(account_id=user.pk, platform=platform).exists():
+        raise errors.ApiError('当前用户无权登录此系统')
+
+    return user
+
 
 
 def create_platform(name, sign):

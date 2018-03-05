@@ -50,9 +50,7 @@ class Api:
         try:
             if self.need_authorize:
                 signture = self.__get_sign(request)
-                print(signture)
                 self.user_id = self.authenticator.sign_to_user_id(signture)
-                print(self.user_id)
             data = self.dispatch(request, *args, **kwargs)
         except errors.ApiError as error:
             errno = error.errno
