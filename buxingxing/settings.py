@@ -128,3 +128,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+LOG_DIR = os.path.join(BASE_DIR, 'var')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'api': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_DIR, 'api.log'),
+        }
+    },
+    'loggers': {
+        'api': {
+            'handlers': ['api'],
+            'level': 'DEBUG',
+            'propagate': False,
+        }
+    }
+}

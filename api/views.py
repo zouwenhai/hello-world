@@ -1,8 +1,11 @@
 import json
+import logging
 
 from api import errors
 from django.http import HttpResponse
 from django.utils import six
+
+api_log = logging.getLogger('api')
 
 
 class Api:
@@ -53,9 +56,11 @@ class Api:
                 self.user_id = self.authenticator.sign_to_user_id(signture)
             data = self.dispatch(request, *args, **kwargs)
         except errors.ApiError as error:
+            api_log.exception('%s-%s' % (error.errno, error.errmsg))
             errno = error.errno
             errmsg = error.errmsg
         except:
+            api_log.exception('服务器异常')
             errno = errors.ApiError.errno
             errmsg = errors.ApiError.errmsg
 
