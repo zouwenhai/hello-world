@@ -5,20 +5,16 @@ signer = signing.TimestampSigner()
 
 class Authenticator:
 
-    def __init__(self, platform, storage):
-        self.platform = platform
+    def __init__(self, storage):
         self.storage = storage
 
     def __set_sign(self, user_id, sign):
-        key = '%s:%s' % (user_id, self.platform)
         self.storage.set(user_id, sign)
 
     def __get_sign(self, user_id):
-        key = '%s:%s' % (user_id, self.platform)
         return self.storage.get(key)
 
     def __clear_sign(self, user_id):
-        key = '%s:%s' % (user_id, self.platform)
         self.storage.clear(key)
 
     def gen_sign(self, user_id):
