@@ -54,3 +54,9 @@ def create_account_to_platform_mapping(account_id, platform_ids):
             'platform_id': platform_id,
         }
         AccountToPlatformMapping.objects.create(**data)
+
+
+def create_account_process(phone, password, name, sex=Account.SEX_UNKNOW,
+        status=Account.ST_NORMAL, platform_ids=[]):
+    account = create_account(phone, password, name, sex, status)
+    create_account_to_platform_mapping(account.pk, platform_ids)

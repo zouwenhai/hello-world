@@ -66,11 +66,6 @@ class AccountView(AppApi):
             'password': password,
             'name': name,
             'sex': sex,
+            'platform_ids': platform_ids,
         }
-        account = account_ctl.create_account(**create_data)
-        if platform_ids:
-            create_data = {
-                'account_id': account.pk,
-                'platform_ids': platform_ids,
-            }
-            account_ctl.create_account_to_platform_mapping(**create_data)
+        account_ctl.create_account_process(**create_data)
