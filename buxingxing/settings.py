@@ -148,3 +148,9 @@ LOGGING = {
         }
     }
 }
+
+
+try:
+    from easyshop.local_settings import *
+except ImportError:
+    pass
