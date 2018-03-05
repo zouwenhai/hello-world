@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth import authenticate
 
-from api import Api
+from api.views import Api
 from api import errors
 
 from .models import Account
