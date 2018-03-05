@@ -10,6 +10,7 @@ from .authenticator import authenticator
 from . import controllers as app_ctl
 
 class AppApi(Api):
+    platform = 'erlangshen'
     authenticator = authenticator
 
 

@@ -13,6 +13,7 @@ class Api:
     http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options', 'trace']
     need_authorize = True
     authenticator = None
+    platform = None
 
     def __init__(self, **kwargs):
         for key in kwargs:
@@ -45,6 +46,13 @@ class Api:
             handler = self.http_method_not_allowed
         return handler(request, *args, **kwargs)
 
+    def get_user_id(self, request):
+        signture = self.__get_sign(request)
+        key = self.authenticator.sign_to_user_id(signture)
+        self.user_id = key.split(':')[1]
+
+        return self.user_id
+
     def __call__(self, request, *args, **kwargs):
         errno = 0
         errmsg = ''
@@ -52,8 +60,7 @@ class Api:
 
         try:
             if self.need_authorize:
-                signture = self.__get_sign(request)
-                self.user_id = self.authenticator.sign_to_user_id(signture)
+                self.get_user_id(request)
             data = self.dispatch(request, *args, **kwargs)
         except errors.ApiError as error:
             api_log.exception('%s-%s' % (error.errno, error.errmsg))
