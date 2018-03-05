@@ -5,3 +5,4 @@ static
 static/*
 migrations
 var
+local_settings.py
