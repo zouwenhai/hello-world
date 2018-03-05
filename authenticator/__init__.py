@@ -12,10 +12,10 @@ class Authenticator:
         self.storage.set(user_id, sign)
 
     def __get_sign(self, user_id):
-        return self.storage.get(key)
+        return self.storage.get(user_id)
 
     def __clear_sign(self, user_id):
-        self.storage.clear(key)
+        self.storage.clear(user_id)
 
     def gen_sign(self, user_id):
         signature = self.__get_sign(user_id)
