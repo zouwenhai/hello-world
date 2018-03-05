@@ -2,7 +2,7 @@ import json
 
 from django.shortcuts import render
 
-from api import Api
+from api.views import Api
 from . import controllers as account_ctl
 from .authenticator import authenticator
 
