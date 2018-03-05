@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'yax',
     'ganx',
     'erlangshen',
+    'account',
 ]
 
 MIDDLEWARE = [
