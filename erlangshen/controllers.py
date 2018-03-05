@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 
 from api import errors
 from .authenticator import authenticator
-from .models import Account
+from .models import Treasure
 
 
 def login(username, password):
@@ -16,10 +16,11 @@ def logout(user_id):
     authenticator.clear_sign(user_id)
 
 
-def create_account(platform, username, password):
+def create_treasure(account_id, platform, username, password):
     data = {
+        'account_id': account_id,
         'platform': platform,
         'username': username,
         'password': password,
     }
-    Account.objects.create(**data)
+    Treasure.objects.create(**data)

@@ -74,5 +74,6 @@ class AccountView(AppApi):
         platform = data.get('platform') or ''
         username = data.get('username') or ''
         password = data.get('password') or ''
+        account_id = self.user_id
 
-        app_ctl.create_account(platform, username, password)
+        app_ctl.create_treasure(account_id, platform, username, password)
