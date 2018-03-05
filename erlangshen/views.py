@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from api.views import Api
 from api import errors
 
-from .models import Account
+from .models import Treasure
 from .authenticator import authenticator
 from . import controllers as app_ctl
 
@@ -50,14 +50,17 @@ class Logout(AppApi):
 
 
 class AccountView(AppApi):
-    need_authorize = False
+    need_authorize = True
 
     def get(self, request):
-        accounts = Account.objects.all()
+        query = {
+            'account_id': self.user_id,
+        }
+        treasures = Treasure.objects.filter(**query)
 
         data_list = []
-        for account in accounts:
-            data = account.detail
+        for treasure in treasures:
+            data = treasure.detail
             data_list.append(data)
 
         data = {

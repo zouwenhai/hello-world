@@ -1,8 +1,11 @@
 from django.db import models
 
+from account.models import Account
 
-class Account(models.Model):
 
+class Treasure(models.Model):
+
+    account = models.ForeignKey(Account)
     platform = models.CharField(max_length=512)
     username = models.CharField(max_length=512)
     password = models.CharField(max_length=512)
