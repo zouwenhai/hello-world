@@ -55,8 +55,7 @@ class Api:
         except errors.ApiError as error:
             errno = error.errno
             errmsg = error.errmsg
-        except Exception as e:
-            print(e)
+        except:
             errno = errors.ApiError.errno
             errmsg = errors.ApiError.errmsg
 
